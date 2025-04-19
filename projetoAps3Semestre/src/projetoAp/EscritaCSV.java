@@ -8,13 +8,13 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class EscritaCSV {
-	public void escreveCsvAluno(List<Aluno> linhas, String filePath) {
+	public static void escreveCsvAluno(List<Aluno> linhas, String filePath) {
 		try(	OutputStream arquivo = new FileOutputStream(filePath);
 				OutputStreamWriter arquivoEscrito = new OutputStreamWriter(arquivo, StandardCharsets.UTF_8);
 				PrintWriter escreve = new PrintWriter(arquivoEscrito, true);
 				){
 			for(Aluno linha: linhas) {
-				escreve.println(linha.getId() + "," + linha.getNome());
+				escreve.println(linha.getId() + ";" + linha.getNome());
 			}
 		}catch(IOException erro) {
 			erro.printStackTrace();
@@ -22,7 +22,7 @@ public class EscritaCSV {
 		
 	}
 	
-	public void escreveCsvCurso(List<Curso> linhas, String filePath) {
+	public static void escreveCsvCurso(List<Curso> linhas, String filePath) {
 		try(	OutputStream arquivo = new FileOutputStream(filePath);
 				OutputStreamWriter arquivoEscrito = new OutputStreamWriter(arquivo, StandardCharsets.UTF_8);
 				PrintWriter escreve = new PrintWriter(arquivoEscrito, true);

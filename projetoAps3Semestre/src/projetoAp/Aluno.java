@@ -1,11 +1,13 @@
 package projetoAp;
 
 public class Aluno {
-	private String nome;
+	
 	private int id;
-	public Aluno(String aNome, int aId) {
-		this.nome = aNome;
+	private String nome;
+	
+	public Aluno(int aId, String aNome) {
 		this.id = aId;
+		this.nome = aNome;
 	}
 	
 	public int getId() {
@@ -13,14 +15,6 @@ public class Aluno {
 	}
 	public String getNome() {
 		return this.nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 	
 }

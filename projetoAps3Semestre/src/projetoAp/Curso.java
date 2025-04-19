@@ -16,27 +16,14 @@ public class Curso {
 	public String getNome() {
 		return nome;
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
 	public int getCod() {
 		return cod;
-	}
-	public void setCod(int cod) {
-		this.cod = cod;
 	}
 	public String getNivel() {
 		return nivel;
 	}
-	public void setNivel(String nivel) {
-		this.nivel = nivel;
-	}
 	public int getAno() {
 		return ano;
 	}
-	public void setAno(int ano) {
-		this.ano = ano;
-	}
-	
 	
 }
