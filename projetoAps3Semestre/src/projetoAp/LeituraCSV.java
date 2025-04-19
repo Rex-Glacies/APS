@@ -13,7 +13,6 @@ public class LeituraCSV {
 	public static List<Aluno> leCsvAluno(String filePath) {//Local onde vai o endereço do arquivo, barras do endereço devem ser / ao inves de \
 		
 		List<Aluno> alunos = new ArrayList<>();
-		
 		try ( 	InputStream arquivo = new FileInputStream(filePath);
 				InputStreamReader lerArquivo = new InputStreamReader(arquivo, StandardCharsets.UTF_8);
 				BufferedReader buffer = new BufferedReader(lerArquivo);
@@ -22,11 +21,7 @@ public class LeituraCSV {
 			while((linha = buffer.readLine())!= null) {
 				
 				String[] palavras = linha.split(";");
-				//for(int i = 0; i < alunos.size(); i++) {
-					//System.out.println(alunos.get(i));
-				//}
-				for(String p: palavras) {
-					
+				for(String p: palavras) {		
 					System.out.println(p);
 				}
 				
@@ -52,11 +47,19 @@ public class LeituraCSV {
 				){
 			String linha;
 			while((linha = buffer.readLine())!= null) {
-				String[] palavras = linha.split(",");
+				String[] palavras = linha.split(";");
 				
 				for(String p: palavras) {
 					System.out.println(p);
 				}
+				
+				String nome = palavras[0];
+				String nivel = palavras[1];
+				int ano = Integer.parseInt(palavras[2]);
+				
+				Curso curso1 = new Curso(nome, nivel, ano);
+				cursos.add(curso1);
+				
 						
 			}
 		}catch(IOException erro) {

@@ -28,7 +28,7 @@ public class EscritaCSV {
 				PrintWriter escreve = new PrintWriter(arquivoEscrito, true);
 				){
 			for(Curso linha: linhas) {
-				escreve.println(linha.getCod() + "," + linha.getNome() + "," + linha.getNivel() + "," + linha.getAno());
+				escreve.println(linha.getNome() + ";" + linha.getNivel() + ";" + linha.getAno());
 			}
 		}catch(IOException erro) {
 			erro.printStackTrace();
