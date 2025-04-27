@@ -36,7 +36,7 @@ public class LeituraCSV {
     }
 
     public static List<Aluno> leCsvAluno() {
-		return lerCSV(new Function<String[],Aluno>() {
+		List<Aluno> alunos = lerCSV(new Function<String[],Aluno>() {
 			
 			@Override
 			public Aluno apply(String[] partes) {
@@ -46,10 +46,12 @@ public class LeituraCSV {
 				return new Aluno(id, nome);
 			}
 		});
+
+		return alunos;
     }
 
     public static List<Curso> leCsvCurso() {
-		return lerCSV(new Function<String[],Curso>() {
+		List<Curso> cursos = lerCSV(new Function<String[],Curso>() {
 
 			@Override
 			public Curso apply(String[] partes) {
@@ -61,6 +63,31 @@ public class LeituraCSV {
 			}
 
 		});
+
+		return cursos;
+    }
+
+	public static List<Nota> leCsvNota() {
+		List<Nota> notas = lerCSV(new Function<String[],Nota>() {
+
+			@Override
+			public Nota apply(String[] partes) {
+				int id = Integer.parseInt(partes[0]);
+				float np1 = Float.parseFloat(partes[1]);
+				float np2 = Float.parseFloat(partes[2]);
+				float reposicao = Float.parseFloat(partes[3]);
+				float exame = Float.parseFloat(partes[4]);
+				System.out.println("Id do aluno: " + id + " - Nota NP1: " + np1 + " - Nota NP2: " + np2 +  " - Nota Reposição: " + reposicao + " - Nota Exame: " + exame);
+				return new Nota(id, np1, np2, reposicao, exame);
+
+			}
+		});
+
+		if (notas.isEmpty()) {
+			System.out.println("Nenhum aluno cursou este curso neste Ano.");
+		}
+
+		return notas;
     }
 
 

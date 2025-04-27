@@ -2,6 +2,7 @@
 package projetoAp;
 
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -31,8 +32,33 @@ public class EscritaCSV {
 	}
 
 	public static void escreveCsvCurso(Curso c) {
-		String curso = c.getNome() + ";" + c.getNivel() + ";" + c.getAno();
-		escrever(curso);
+		try {
+			String curso = c.getNome() + ";" + c.getNivel() + ";" + c.getAno();
+			escrever(curso);
+			OutputStream arquivo = new FileOutputStream(GerenciarArquivos.CriarArquivoNota(c.getNome(), c.getNivel(), c.getAno()), true);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+
+	public static void escreveNota(Nota n) {
+		try {
+			String caminho = GerenciarArquivos.CaminhoCompleto();
+
+			File arquivo = new File(caminho);
+
+			if (arquivo.exists()) {
+				String nota = n.getIdAluno() + ";" + n.getNp1() + ";" + n.getNp2() + ";" + (n.getReposicao() != -1 ? n.getReposicao() : 0) + ";" + (n.getExame() != -1 ? n.getExame() : 0);
+				escrever(nota);	
+			}
+			
+
+		} catch (Exception e) {
+			System.out.println("Erro ao tentar acessar ou escrever no arquivo: " + e.getMessage());
+			e.printStackTrace();
+		}
+		
 	}
 
 	
