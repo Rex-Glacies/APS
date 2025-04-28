@@ -35,7 +35,7 @@ public class TesteProjeto {
 				
 				Curso ncurso = new Curso(nomeCurso, nivel, ano);
 				EscritaCSV.escreveCsvCurso(ncurso);
-				System.out.println("Curso cadastrado com sucesso");
+				
 				break;
 			case 2:
 				GerenciarArquivos.decidirArquivo(opcao);
@@ -51,8 +51,6 @@ public class TesteProjeto {
 
 				Aluno naluno = new Aluno(id, nomeAluno);
 				EscritaCSV.escreveCsvAluno(naluno);
-
-				System.out.println("Aluno cadatrado com sucesso");
 				break;
 			case 4:
 				GerenciarArquivos.decidirArquivo(opcao);
@@ -90,8 +88,6 @@ public class TesteProjeto {
 
 				Nota nNota = new Nota(alunoid, np1, np2, reposicao, exame);
 				EscritaCSV.escreveNota(nNota);
-
-				System.out.println("Nota cadatrada com sucesso");
 				break;
 			case 6:
 				System.out.println("Nome do curso para inserir a nota: ");

@@ -27,15 +27,32 @@ public class EscritaCSV {
 	}
 
 	public static void escreveCsvAluno(Aluno a) {
-		String aluno = a.getId() + ";" + a.getNome();
-		escrever(aluno);
+		try {
+			String aluno = a.getId() + ";" + a.getNome();
+			if (GerenciarExistencia.alunoIdIgual(a.getId())) {
+				System.out.println("Erro: Aluno já cadastrado com esse ID!");
+			} else {
+				System.out.println("Aluno cadatrado com sucesso");
+				escrever(aluno);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
 	}
 
 	public static void escreveCsvCurso(Curso c) {
 		try {
 			String curso = c.getNome() + ";" + c.getNivel() + ";" + c.getAno();
-			escrever(curso);
-			OutputStream arquivo = new FileOutputStream(GerenciarArquivos.CriarArquivoNota(c.getNome(), c.getNivel(), c.getAno()), true);
+			if (GerenciarExistencia.CursoIgual(curso)) {
+				System.out.println("Erro: Curso já cadastrado com esse nome, graduação e ano!");
+				return;
+			} else {
+				escrever(curso);
+				System.out.println("Curso cadastrado com sucesso");
+				OutputStream arquivo = new FileOutputStream(GerenciarArquivos.CriarArquivoNota(c.getNome(), c.getNivel(), c.getAno()), true);
+			}
+
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -50,7 +67,14 @@ public class EscritaCSV {
 
 			if (arquivo.exists()) {
 				String nota = n.getIdAluno() + ";" + n.getNp1() + ";" + n.getNp2() + ";" + (n.getReposicao() != -1 ? n.getReposicao() : 0) + ";" + (n.getExame() != -1 ? n.getExame() : 0);
-				escrever(nota);	
+				if (GerenciarExistencia.alunoIdIgual(n.getIdAluno())) {
+					System.out.println("Erro: Aluno já cadastrado com esse ID neste curso");
+					return;
+				} else {
+					System.out.println("Nota cadatrada com sucesso");
+					escrever(nota);	
+				}
+				
 			}
 			
 
