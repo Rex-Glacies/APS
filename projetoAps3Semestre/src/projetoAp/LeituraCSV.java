@@ -2,6 +2,7 @@ package projetoAp;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -14,7 +15,7 @@ import java.util.function.Function;
 public class LeituraCSV {
 
     // Método genérico para ler o arquivo CSV e retornar uma lista de objetos
-    public static <T> List<T> lerCSV(Function<String[], T> conversor) {
+    public static <T> List<T> lerCSV(Function<String[], T> conversor) throws FileNotFoundException {
         List<T> lista = new ArrayList<>();  // Lista para armazenar os objetos
 
         try (
@@ -29,13 +30,13 @@ public class LeituraCSV {
                 lista.add(objeto);  // Adiciona o objeto à lista
             }
         } catch (IOException erro) {
-            erro.printStackTrace();  // Em caso de erro, imprime a pilha de exceções
+            throw new RuntimeException("Erro ao ler o arquivo: " + erro.getMessage(), erro);
         }
 
         return lista;  // Retorna a lista de objetos
     }
 
-    public static List<Aluno> leCsvAluno() {
+    public static List<Aluno> leCsvAluno() throws FileNotFoundException {
 		List<Aluno> alunos = lerCSV(new Function<String[],Aluno>() {
 			
 			@Override
@@ -50,7 +51,7 @@ public class LeituraCSV {
 		return alunos;
     }
 
-    public static List<Curso> leCsvCurso() {
+    public static List<Curso> leCsvCurso() throws FileNotFoundException  {
 		List<Curso> cursos = lerCSV(new Function<String[],Curso>() {
 
 			@Override
@@ -67,27 +68,42 @@ public class LeituraCSV {
 		return cursos;
     }
 
-	public static List<Nota> leCsvNota() {
-		List<Nota> notas = lerCSV(new Function<String[],Nota>() {
+		public static List<Nota> leCsvNota() {
+			List<Nota> notas = new ArrayList<>();
+			boolean leituraFeitaComSucesso  = false;
+			try {
+				notas = lerCSV(new Function<String[],Nota>() {
 
-			@Override
-			public Nota apply(String[] partes) {
-				int id = Integer.parseInt(partes[0]);
-				float np1 = Float.parseFloat(partes[1]);
-				float np2 = Float.parseFloat(partes[2]);
-				float reposicao = Float.parseFloat(partes[3]);
-				float exame = Float.parseFloat(partes[4]);
-				System.out.println("Id do aluno: " + id + " - Nota NP1: " + np1 + " - Nota NP2: " + np2 +  " - Nota Reposição: " + reposicao + " - Nota Exame: " + exame);
-				return new Nota(id, np1, np2, reposicao, exame);
+				@Override
+				public Nota apply(String[] partes) {
+					int id = Integer.parseInt(partes[0]);
+					float np1 = Float.parseFloat(partes[1]);
+					float np2 = Float.parseFloat(partes[2]);
+					float reposicao = Float.parseFloat(partes[3]);
+					float exame = Float.parseFloat(partes[4]);
+					System.out.println("Id do aluno: " + id + " - Nota NP1: " + np1 + " - Nota NP2: " + np2 +  " - Nota Reposição: " + reposicao + " - Nota Exame: " + exame);
+					return new Nota(id, np1, np2, reposicao, exame);
 
+				}
+				});
+				leituraFeitaComSucesso  = true;
+
+			} catch (Exception e) {
+				if (e instanceof FileNotFoundException) {
+					System.out.println("Erro: Arquivo de notas não encontrado.");
+				} else {
+					System.out.println("Erro ao ler o arquivo de notas: " + e.getMessage());
+				}
 			}
-		});
+								
+				if (leituraFeitaComSucesso && notas.isEmpty()) {
+					System.out.println("Nenhum aluno cursou este curso neste Ano.");
+				}
 
-		if (notas.isEmpty()) {
-			System.out.println("Nenhum aluno cursou este curso neste Ano.");
+				return notas;
+				
 		}
 
-		return notas;
     }
 
 
@@ -147,4 +163,3 @@ public class LeituraCSV {
 		}
 		return cursos;
 	}*/
-}

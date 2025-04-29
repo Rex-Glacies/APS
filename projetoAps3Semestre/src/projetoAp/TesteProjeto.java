@@ -1,9 +1,10 @@
 package projetoAp;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class TesteProjeto {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
 
 	Scanner scanner = new Scanner(System.in);
 	int opcao = 0;
@@ -90,13 +91,13 @@ public class TesteProjeto {
 				EscritaCSV.escreveNota(nNota);
 				break;
 			case 6:
-				System.out.println("Nome do curso para inserir a nota: ");
+				System.out.println("Nome do curso: ");
 				String lernCurso = scanner.nextLine();
 
-				System.out.println("Nivel do curso para inserir a nota: ");
+				System.out.println("Nivel do curso: ");
 				String lerniCurso = scanner.nextLine();
 
-				System.out.println("Ano do curso para inserir a nota: ");
+				System.out.println("Ano do curso: ");
 				int leranCurso = Integer.parseInt(scanner.nextLine());
 
 				GerenciarArquivos.decidirArquivoNota(opcao,lernCurso, lerniCurso, leranCurso);

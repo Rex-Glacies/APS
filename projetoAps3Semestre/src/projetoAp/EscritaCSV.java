@@ -36,7 +36,8 @@ public class EscritaCSV {
 				escrever(aluno);
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println("Erro ao escrever os dados do aluno no CSV: " + e.getMessage());
+        	e.printStackTrace();
 		}
 
 	}
@@ -54,7 +55,8 @@ public class EscritaCSV {
 			}
 
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println("Erro ao escrever os dados do curso no CSV: " + e.getMessage());
+        	e.printStackTrace();
 		}
 
 	}
@@ -75,6 +77,8 @@ public class EscritaCSV {
 					escrever(nota);	
 				}
 				
+			}else {
+				System.out.println("Arquivo informado não existe");
 			}
 			
 
