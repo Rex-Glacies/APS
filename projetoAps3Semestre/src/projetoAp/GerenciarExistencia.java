@@ -3,15 +3,16 @@ package projetoAp;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
 
-public class GerenciarExistencia {
+public class GerenciarExistencia  {
     public static File file = new File(GerenciarArquivos.CaminhoCompleto());
     public static String linha;
 
-    public static BufferedReader AbrirArqivo() {
+    public static BufferedReader AbrirArqivo()  {
   
         if (!file.exists()) {
             return null;
@@ -23,9 +24,8 @@ public class GerenciarExistencia {
             return new BufferedReader(inputStreamReader);
             //String linha;
  
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+        } catch (IOException e) {
+            throw new RuntimeException("Erro ao ler o arquivo: " + e.getMessage(), e);
         }
     }
 
@@ -45,15 +45,15 @@ public class GerenciarExistencia {
                 }
             }
             
-        } catch (Exception e) {
-            // TODO: handle exception
+        } catch (IOException e) {
+            throw new RuntimeException("Erro ao ler o arquivo: " + e.getMessage(), e);
         }
 
         return false;
 
     }
 
-    public static boolean alunoIdIgual(int dados) {
+    public static boolean alunoIdIgual(int dados)  {
         BufferedReader br = AbrirArqivo();
 
         if (br == null) {
@@ -69,8 +69,8 @@ public class GerenciarExistencia {
                 }
             }
             
-        } catch (Exception e) {
-            // TODO: handle exception
+        } catch (IOException e) {
+            throw new RuntimeException("Erro ao ler o arquivo: " + e.getMessage(), e);
         }
         return false;
     }
