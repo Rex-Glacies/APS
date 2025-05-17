@@ -4,6 +4,66 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class TesteProjeto {
+
+    public static int verificarNumeroInteiros(String mensagem) {
+		Scanner scanner = new Scanner(System.in);
+		int numero = 0;
+		boolean valida = false;
+
+		while (!valida) {
+			System.out.println(mensagem);
+
+			try {
+				numero = Integer.parseInt(scanner.nextLine());
+				valida = true;
+			} catch (NumberFormatException e) {
+				System.out.println("Erro: Insira somente números.");
+			}
+		}
+
+		return numero;
+
+    }
+
+	public static Float verificarNumeroFloat(String mensagem) {
+		Scanner scanner = new Scanner(System.in);
+		Float numero = 0f;
+		boolean valida = false;
+
+		while (!valida) {
+			System.out.println(mensagem);
+
+			try {
+				numero = Float.parseFloat(scanner.nextLine());
+				valida = true;
+			} catch (NumberFormatException e) {
+				System.out.println("Erro: Insira somente números.");
+			}
+		}
+
+		return numero;
+
+    }
+
+	public static float verificarNumeroFloatOpcional(String menssagem) {
+		Scanner scanner = new Scanner(System.in);
+		float numero = -1f;
+
+		while (true) {
+			System.out.println(menssagem);
+			String resposta = scanner.nextLine();
+
+			if (resposta.isEmpty()) {
+				return numero;
+			}
+
+			try {
+				return Float.parseFloat(resposta);
+			} catch (NumberFormatException e) {
+				System.out.println("Erro: Insira somente números.");
+			}
+		}
+	}
 	public static void main(String[] args) throws FileNotFoundException {
 
 	Scanner scanner = new Scanner(System.in);
@@ -51,13 +111,7 @@ public class TesteProjeto {
 				System.out.print("Nível do curso: ");
 				String nivel = scanner.nextLine();
 
-				System.out.print("Ano do curso: ");
-				int ano = 0;
-				try {
-					 ano = Integer.parseInt(scanner.nextLine());
-				} catch (NumberFormatException e) {
-					System.out.println("Erro: Insira somente números");
-				}
+				int ano = verificarNumeroInteiros("Ano do curso: ");
 				
 				Curso ncurso = new Curso(nomeCurso, nivel, ano);
 				EscritaCSV.escreveCsvCurso(ncurso);
@@ -69,13 +123,8 @@ public class TesteProjeto {
 				break;
 			case 3:
 				GerenciarArquivos.decidirArquivo(opcao);
-				System.out.println("Id do aluno: ");
-				int id = 0;
-				try {
-					 id = Integer.parseInt(scanner.nextLine());
-				} catch (NumberFormatException e) {
-					System.out.println("Erro: Insira somente números");
-				}
+				int id = verificarNumeroInteiros("Id do aluno: ");
+
 				System.out.println("Nome do aluno: ");
 				String nomeAluno = scanner.nextLine();
 
@@ -93,57 +142,21 @@ public class TesteProjeto {
 				System.out.println("Nivel do curso para inserir a nota: ");
 				String niCurso = scanner.nextLine();
 
-				System.out.println("Ano do curso para inserir a nota: ");
-				int anCurso = 0;
-				try {
-					anCurso = Integer.parseInt(scanner.nextLine());
-				} catch (NumberFormatException e) {
-					System.out.println("Erro: Insira somente números");
-				}
+				int anCurso =  verificarNumeroInteiros("Ano do curso para inserir a nota: ");
+
 
 				GerenciarArquivos.decidirArquivoNota(opcao,nCurso, niCurso, anCurso);
 
-				System.out.println("Digite o Id do aluno: ");
-				int alunoid = 0;
-				try {
-					alunoid = Integer.parseInt(scanner.nextLine());
-				} catch (NumberFormatException e) {
-					System.out.println("Erro: Insira somente números");
-				}
+				int alunoid = verificarNumeroInteiros("Digite o Id do aluno: ");
 
-				System.out.println("Digite a nota da NP1:");
-				float np1 = 0;
-				try {
-					np1 = Float.parseFloat(scanner.nextLine());
-				} catch (NumberFormatException e) {
-					System.out.println("Erro: Insira somente números");
-				}
+				float np1 = verificarNumeroFloat("Digite a nota da NP1:");
 
-				System.out.println("Digite a nota da NP2:");
-				float np2 = 0;
-				try {
-					np2 = Float.parseFloat(scanner.nextLine());
-				} catch (NumberFormatException e) {
-					System.out.println("Erro: Insira somente números");
-				}
+				float np2 = verificarNumeroFloat("Digite a nota da NP2:");
 
-				System.out.println("Digite a nota da Reposição:");
-				String reposicaoInput = scanner.nextLine();
-				float reposicao = 0;
-				try {
-					reposicao = reposicaoInput.isEmpty() ? -1 : Float.parseFloat(reposicaoInput);
-				} catch (NumberFormatException e) {
-					System.out.println("Erro: Insira somente números");
-				}
+				float reposicao = verificarNumeroFloatOpcional("Digite a nota da Reposição:");
 
-				System.out.println("Digite a nota do exame:");
-				String exameInput = scanner.nextLine();
-				float exame = 0;
-				try {
-					exame = exameInput.isEmpty() ? -1 : Float.parseFloat(exameInput);
-				} catch (NumberFormatException e) {
-					System.out.println("Erro: Insira somente números");
-				}
+				float exame = verificarNumeroFloatOpcional("Digite a nota do exame:");
+	
 
 
 				Nota nNota = new Nota(alunoid, np1, np2, reposicao, exame);
@@ -156,8 +169,7 @@ public class TesteProjeto {
 				System.out.println("Nivel do curso: ");
 				String lerniCurso = scanner.nextLine();
 
-				System.out.println("Ano do curso: ");
-				int leranCurso = Integer.parseInt(scanner.nextLine());
+				int leranCurso = verificarNumeroInteiros("Ano do curso: ");
 
 				GerenciarArquivos.decidirArquivoNota(opcao,lernCurso, lerniCurso, leranCurso);
 
