@@ -17,13 +17,10 @@ public class GerenciarExistencia  {
         if (!file.exists()) {
             return null;
         }
-
         try {
             FileInputStream fileInputStream = new FileInputStream(file);
             InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, StandardCharsets.UTF_8);
             return new BufferedReader(inputStreamReader);
-            //String linha;
- 
         } catch (IOException e) {
             throw new RuntimeException("Erro ao ler o arquivo: " + e.getMessage(), e);
         }
@@ -35,22 +32,17 @@ public class GerenciarExistencia  {
         if (br == null) {
             return false;
         }
-
         try {
-            
-
             while ((linha = br.readLine()) != null) {
                 if (linha.equals(dados)) {
                     return true;
                 }
-            }
-            
+            }   
         } catch (IOException e) {
             throw new RuntimeException("Erro ao ler o arquivo: " + e.getMessage(), e);
         }
 
         return false;
-
     }
 
     public static boolean alunoIdIgual(int dados)  {
@@ -59,7 +51,6 @@ public class GerenciarExistencia  {
         if (br == null) {
             return false;
         }
-
         try {
             
             while ((linha = br.readLine()) != null) {
@@ -67,8 +58,7 @@ public class GerenciarExistencia  {
                 if (campo.length > 0 &&  campo[0].equals(String.valueOf(dados))) {
                     return true;
                 }
-            }
-            
+            }   
         } catch (IOException e) {
             throw new RuntimeException("Erro ao ler o arquivo: " + e.getMessage(), e);
         }

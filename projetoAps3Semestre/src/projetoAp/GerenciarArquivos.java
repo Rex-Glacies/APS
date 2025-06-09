@@ -3,7 +3,7 @@ package projetoAp;
 import java.io.File;
 
 public class GerenciarArquivos {
-    static String basePath = System.getProperty("user.dir"); // pega o diretório onde o programa foi iniciado
+    static String basePath = System.getProperty("user.dir"); 
 	static String arquivoSelecionado;
 
     public static void decidirArquivo(int opcao1) {

@@ -1,4 +1,4 @@
-	package projetoAp;
+package projetoAp;
 
 public class Curso {
 	
